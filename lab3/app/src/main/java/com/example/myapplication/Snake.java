@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.LinkedList;
@@ -77,14 +78,14 @@ public class Snake {
 
     public void draw(Canvas canvas) {
         Paint paint = new Paint();
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.RED);
         for (Rectangle r : list) {
             canvas.drawRect(r.x, r.y, r.x + r.width, r.y + r.height, paint);
         }
     }
 
     public void move() {
-        switch(direction){
+        switch(direction) {
             case UP:
                 up();
                 break;
