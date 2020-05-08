@@ -1,22 +1,45 @@
-package com.company;
+package com.example.myapplication;
 
-import java.awt.*;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+
 import java.util.LinkedList;
 
 public class Snake {
+    public static class Rectangle {
+        public int x;
+        public int y;
+        public int width;
+        public int height;
+
+        public Rectangle(int x, int y, int width, int height){
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+        }
+
+        public Rectangle(Rectangle obj){
+            this.x = obj.x;
+            this.y = obj.y;
+            this.width = obj.width;
+            this.height = obj.height;
+        }
+    }
+
     public static final int UP = 0;
     public static final int DOWN = 1;
     public static final int LEFT = 2;
     public static final int RIGHT = 3;
 
-    private int x = 10, y = 10, w = 30, h = 30;
-    private int step = 30;
+    private int step = 70;
     private LinkedList<Rectangle> list = new LinkedList<>();
     private int direction = RIGHT;
 
     Snake() {
-        for (int i = 4; i > 0; i--) {
-            list.add(new Rectangle(x + i * w, y, w, h));
+        int x = 10, y = 10;
+        for (int i = 5; i > 0; i--) {
+            list.add(new Rectangle(x + i * step, y, step, step));
         }
     }
 
@@ -52,10 +75,11 @@ public class Snake {
         list.addFirst(r);
     }
 
-
-    public void draw(Graphics g) {
+    public void draw(Canvas canvas) {
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.STROKE);
         for (Rectangle r : list) {
-            g.drawRect(r.x, r.y, r.width, r.height);
+            canvas.drawRect(r.x, r.y, r.x + r.width, r.y + r.height, paint);
         }
     }
 
@@ -73,16 +97,6 @@ public class Snake {
             case LEFT:
                 left();
                 break;
-        }
-    }
-
-    public void eat(LinkedList<Apple> apples){
-        for (int i = 0; i < apples.size(); i++){
-            if (list.getFirst().equals(apples.get(i).getImage())){
-                list.add(new Rectangle(list.getLast().x, list.getLast().y, w, h));
-                apples.remove(i);
-                i -= 1;
-            }
         }
     }
 }

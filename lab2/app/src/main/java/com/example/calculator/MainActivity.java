@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final char ADDITION = '+';
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_point:
                 if (!data.contains(".")) {
                     tv.append(".");
+                } else {
+                    showError();
                 }
                 break;
             case R.id.btn_plus:
@@ -80,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     leftOperand = Double.valueOf(data);
                     operation = ADDITION;
                     tv.append(" + ");
+                } else {
+                    showError();
                 }
                 break;
             case R.id.btn_minus:
@@ -89,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     tv.append(" - ");
                 } else if (data.equals("")) {
                     tv.append("-");
+                } else {
+                    showError();
                 }
                 break;
             case R.id.btn_multiplication:
@@ -96,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     leftOperand = Double.valueOf(data);
                     operation = MULTIPLICATION;
                     tv.append(" * ");
+                } else {
+                    showError();
                 }
                 break;
             case R.id.btn_division:
@@ -103,12 +112,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     leftOperand = Double.valueOf(data);
                     operation = DIVISION;
                     tv.append(" / ");
+                } else {
+                    showError();
                 }
                 break;
             case R.id.btn_equal:
                 if ((leftOperand != null) && IsRightString(data)) {
                     rightOperand = Double.valueOf(data);
                     DoOperation();
+                } else {
+                    showError();
                 }
                 break;
         }
@@ -135,5 +148,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean IsRightString(String str) {
         return !str.equals("") && !str.equals("-") && !str.equals(".") && !str.equals("-.");
+    }
+
+    private void showError() {
+        Toast.makeText(this, "Ошибка", Toast.LENGTH_SHORT).show();
     }
 }

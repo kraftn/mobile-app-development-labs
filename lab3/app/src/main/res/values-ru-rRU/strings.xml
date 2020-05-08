@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Игра</string>
+    <string name="start">Старт</string>
+    <string name="exit">Выйти</string>
+    <string name="left">Влево</string>
+    <string name="up">Вверх</string>
+    <string name="down">Вниз</string>
+    <string name="right">Вправо</string>
+</resources>
